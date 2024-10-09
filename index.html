@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -25,8 +26,8 @@
             align-items: center;
             padding: 10px 20px;
             position: sticky;
-            background-color: white; /* Added for better visibility */
-            z-index: 1000; /* Ensure navbar is above other elements */
+            background-color: white;
+            z-index: 1000;
         }
 
         .icon {
@@ -105,16 +106,16 @@
         }
 
         h1 {
-            font-size: 3rem; /* Responsive size */
+            font-size: 3rem;
             color: #f39c12;
         }
 
         h2 {
-            font-size: 2rem; /* Responsive size */
+            font-size: 2rem;
         }
 
         h3 {
-            font-size: 1.5rem; /* Responsive size */
+            font-size: 1.5rem;
             font-weight: 400;
         }
 
@@ -130,7 +131,7 @@
             border: none;
             padding: 10px 20px;
             margin: 0 10px;
-            font-size: 1rem; /* Responsive size */
+            font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
@@ -184,17 +185,17 @@
             }
 
             h1 {
-                font-size: 2.5rem; /* Adjusted for smaller screens */
+                font-size: 2.5rem;
             }
 
             h2 {
-                font-size: 1.8rem; /* Adjusted for smaller screens */
+                font-size: 1.8rem;
             }
 
             h3 {
-                font-size: 1.2rem; /* Adjusted for smaller screens */
+                font-size: 1.2rem;
             }
-            
+
         }
 
         .nav-toggle {
@@ -203,37 +204,120 @@
             cursor: pointer;
             color: #f39c12;
         }
-        .aboutme{
-            order:3;
+
+        .aboutme {
+            order: 3;
             max-width: 950px;
-            margin:150px 0px 0px 0px;
-            width:95%;
+            margin: 150px 0px 0px 0px;
+            width: 95%;
         }
-        .aboutme .text p{
-            font-size:19px;
+
+        .aboutme .text p {
+            font-size: 19px;
         }
-        .text h4{
+
+        .text h4 {
             font-size: 30px;
         }
+
         @media (max-width: 768px) {
             .navbar {
                 display: flex;
             }
-            .main{
-                margin-top:0px;
+
+            .main {
+                margin-top: 0px;
             }
+
             .nav-toggle {
                 display: block;
             }
-            p{
-                font-size:15px;
+
+            p {
+                font-size: 15px;
             }
-            .aboutme{
-                margin-top:40px;
+
+            .aboutme {
+                margin-top: 40px;
             }
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: #f4f4f4;
+            padding: 40px 20px;
+            order:4;
+            max-width:600px;
+            width:95%;
+            margin-top:150px;
+            text-align: center;
+        }
+
+        .contact h4 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+
+        .contact p {
+            font-size: 1rem;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+
+        .contact form {
+            max-width: 900px;
+            width:100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+
+        .contact textarea {
+            resize: vertical;
+        }
+
+        .contact button {
+            background-color: #f39c12;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .contact button:hover {
+            background-color: #d68a11;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer a {
+            color: #f39c12;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+
 <body>
     <nav class="navbar">
         <div class="icon">
@@ -244,9 +328,9 @@
         <div class="nav-items">
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="#aboutme">About</a></li>
-                <li><a href="#">Projects</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="#">Hire Me</a></li>
             </ul>
         </div>
@@ -271,11 +355,29 @@
         <section class="aboutme" id="about">
             <div class="text">
                 <h4>About</h4>
-                <p>Greetings! I'm Bhavya Padaliya, a dedicated Computer Science Engineering student currently in my second year at Parul University. My academic journey has ignited a strong passion for backend development, where I enjoy crafting robust and scalable server-side solutions.
-                <br><br>With a keen eye for detail and a drive to solve complex problems, I am constantly striving to enhance my technical skills and knowledge. My goal is to transform intricate challenges into efficient, streamlined systems, making a meaningful impact in the tech world.</p>
-                </div>
+                <p>I am Bhavya Padaliya, a dedicated and ambitious Computer Science Engineering student in my second year. With a strong focus on backend development, I am passionate about creating efficient, scalable systems and solving complex technical challenges. <br><br> My journey in tech is driven by a commitment to continuous learning, and I am actively working on building a solid foundation in various programming languages and frameworks. My long-term goal is to contribute meaningfully to the tech industry while developing innovative solutions that enhance user experiences. <br><br>Skills :- Core Python, Java, PHP, Flask, Mysql, PHPMyAdmin, Git, Github</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact" id="contact">
+            <h4>Contact Me</h4>
+            <p>Email: <a href="mailto:padaliyabhavya834@gmail.com">padaliyabhavya834@gmail.com</a></p>
+            <p>Instagram: <a href="https://www.instagram.com/padaliyabhavya" target="_blank">Follow me on Instagram</a></p>
+
+            <form>
+                <input type="text" placeholder="Your Name" required>
+                <input type="email" placeholder="Your Email" required>
+                <textarea rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Bhavya Padaliya | <a href="mailto:padaliyabhavya834@gmail.com">Contact Me</a></p>
+    </footer>
 
     <script>
         function toggleMenu() {
@@ -284,4 +386,5 @@
         }
     </script>
 </body>
+
 </html>
