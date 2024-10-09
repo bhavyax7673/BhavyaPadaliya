@@ -194,6 +194,7 @@
             h3 {
                 font-size: 1.2rem; /* Adjusted for smaller screens */
             }
+            
         }
 
         .nav-toggle {
@@ -202,7 +203,18 @@
             cursor: pointer;
             color: #f39c12;
         }
-
+        .aboutme{
+            order:3;
+            max-width: 950px;
+            margin:150px 0px 0px 0px;
+            width:95%;
+        }
+        .aboutme .text p{
+            font-size:19px;
+        }
+        .text h4{
+            font-size: 30px;
+        }
         @media (max-width: 768px) {
             .navbar {
                 display: flex;
@@ -212,6 +224,12 @@
             }
             .nav-toggle {
                 display: block;
+            }
+            p{
+                font-size:15px;
+            }
+            .aboutme{
+                margin-top:40px;
             }
         }
     </style>
@@ -225,8 +243,8 @@
         <div class="nav-toggle" onclick="toggleMenu()">☰</div>
         <div class="nav-items">
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="#aboutme">About</a></li>
                 <li><a href="#">Projects</a></li>
                 <li><a href="#">Contact</a></li>
                 <li><a href="#">Hire Me</a></li>
@@ -242,12 +260,20 @@
                 <h3>2nd Year BTech Student in CSE, Aspiring Backend Developer.</h3>
                 <div class="buttons">
                     <button class="button">Hire Me</button>
-                    <button class="button">View Projects</button>
+                    <button class="viewprojects button">View Projects</button>
                 </div>
             </div>
         </section>
         <section class="image">
             <img src="assets/image.png" alt="Bhavya Padaliya">
+        </section>
+
+        <section class="aboutme" id="about">
+            <div class="text">
+                <h4>About</h4>
+                <p>Greetings! I'm Bhavya Padaliya, a dedicated Computer Science Engineering student currently in my second year at Parul University. My academic journey has ignited a strong passion for backend development, where I enjoy crafting robust and scalable server-side solutions.
+                <br><br>With a keen eye for detail and a drive to solve complex problems, I am constantly striving to enhance my technical skills and knowledge. My goal is to transform intricate challenges into efficient, streamlined systems, making a meaningful impact in the tech world.</p>
+                </div>
         </section>
     </main>
 
