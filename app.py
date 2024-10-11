@@ -78,7 +78,7 @@ def hireme():
     else:
         flash("There was an issue sending your inquiry. Please try again.", "error")
 
-    return redirect(url_for("hireme"))
+    return redirect(url_for("home"))
 
 @app.route("/hireme")
 def hireme_form():
