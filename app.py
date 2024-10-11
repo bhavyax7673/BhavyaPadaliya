@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
-def send_email(subject, body):
+def send_email(to,subject, body):
     try:
        
         s = smtplib.SMTP('smtp.gmail.com', 587)
@@ -16,7 +16,7 @@ def send_email(subject, body):
        
         msg = MIMEMultipart()
         msg['From'] = "padaliyabhavya834@gmail.com"
-        msg['To'] = "bhvyap67@gmail.com"
+        msg['To'] = to
         msg['Subject'] = subject
 
         # Attach the body
@@ -31,42 +31,10 @@ def send_email(subject, body):
         print(f"Failed to send email: {e}")
         return False
 
+
 @app.route("/")
 def home():
-    ip = request.remote_addr
-    
-    # Attempt to read views_data from the file
-    try:
-        with open("viewscount.txt", "r+") as views_data:
-            data = views_data.readlines()
-            
-            # Check if the file is empty
-            if not data:
-                couter = 0  # Initialize counter to 0 if file is empty
-                viewers = []
-            else:
-                # Split the first line into counter and viewers
-                couter, viewers = data[0].strip().split(",")
-                viewers = eval(viewers)  # Convert string representation of list to list
-                
-            # Ensure counter is an integer
-            couter = int(couter)
-            
-            if ip not in viewers:
-                couter += 1  # Increment the counter if IP is new
-                viewers.append(ip)  # Add the new viewer IP to the list
-                
-                # Write updated counter and viewers back to the file
-                with open("viewscount.txt", "w") as file:
-                    file.write(f"{couter},{viewers}")
-    except Exception as e:
-        print(f"Error reading or writing views count: {e}")
-        couter = 0  # Fallback to zero on error
-        viewers = []
-
-    return render_template("index.html", ip=couter)
-
-
+    return render_template("index.html")
 @app.route("/projects")
 def projects():
     return render_template("projects.html")
@@ -77,13 +45,14 @@ def contact():
     name = request.form.get("name").strip()
     message = request.form.get("message").strip()
 
-    if send_email("Message from Portfolio Visitor", f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"):
+    if send_email("bhvyap67@gmail.com","Message from Portfolio Visitor", f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"):
         flash("Your message has been sent successfully!", "success")
+
+        
     else:
         flash("There was an issue sending your message. Please try again.", "error")
 
     return redirect(url_for("home"))
-
 @app.route("/hireme", methods=["POST"])
 def hireme():
     client_name = request.form.get("client-name").strip()
@@ -96,21 +65,47 @@ def hireme():
     additional_notes = request.form.get("additional-notes").strip()
 
     subject = "New Project Inquiry from Hire Me Form"
-    body = (f"Client Name: {client_name}\n"
-            f"Client Email: {client_email}\n"
-            f"Project Title: {project_title}\n"
-            f"Project Description:\n{project_description}\n"
-            f"Service Type: {service_type}\n"
-            f"Deadline: {deadline}\n"
-            f"Budget: {budget}\n"
-            f"Additional Notes:\n{additional_notes}")
+    body = (f"Dear [Your Name],\n\n"
+            f"You have received a new project inquiry from your portfolio site. Below are the details:\n\n"
+            f"**Client Name:** {client_name}\n"
+            f"**Client Email:** {client_email}\n"
+            f"**Project Title:** {project_title}\n"
+            f"**Project Description:**\n{project_description}\n"
+            f"**Service Type:** {service_type}\n"
+            f"**Deadline:** {deadline}\n"
+            f"**Budget:** {budget}\n"
+            f"**Additional Notes:**\n{additional_notes}\n\n"
+            f"Please review the details and get back to the client as soon as possible.\n\n"
+            f"Best regards,\n")
 
-    if send_email(subject, body):
+    # Send email to the developer
+    if send_email("bhvyap67@gmail.com", subject, body):
         flash("Your project inquiry has been sent successfully!", "success")
+
+        # Send confirmation email to the client
+        confirmation_subject = "Confirmation of Your Project Inquiry"
+        confirmation_body = (f"Dear {client_name},\n\n"
+                             f"Thank you for reaching out to me regarding your project titled \"{project_title}\". I have successfully received your inquiry and appreciate the information you provided.\n\n"
+                             f"Here are the details you submitted:\n\n"
+                             f"**Project Title:** {project_title}\n"
+                             f"**Project Description:**\n{project_description}\n"
+                             f"**Service Type:** {service_type}\n"
+                             f"**Deadline:** {deadline}\n"
+                             f"**Budget:** {budget}\n"
+                             f"**Additional Notes:**\n{additional_notes}\n\n"
+                             f"I value the opportunity to potentially work with you on this project. However, I would like to review your requirements in more detail during our discussion to ensure I can meet your expectations and provide the best possible service.\n\n"
+                             f"I will send you a meeting link along with available times for us to discuss further. If the suggested time does not work for you, please feel free to reply to this email with your preferred timing.\n\n"
+                             f"Thank you once again for considering me for your project. I look forward to our conversation and exploring how I can assist you.\n\n"
+                             f"Best regards,\n"
+                             f"Bhavya Padaliya\n"
+                             f"https://padaliya-bhavya.vercel.app/\n")
+
+        send_email(client_email, confirmation_subject, confirmation_body)  # Send confirmation to client
     else:
         flash("There was an issue sending your inquiry. Please try again.", "error")
 
     return redirect(url_for("home"))
+
 
 @app.route("/hireme")
 def hireme_form():
