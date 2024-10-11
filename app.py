@@ -31,39 +31,40 @@ def send_email(subject, body):
         print(f"Failed to send email: {e}")
         return False
 
-
 @app.route("/")
 def home():
     ip = request.remote_addr
-
-    # Read view count data
+    
+    # Attempt to read views_data from the file
     try:
-        with open("viewscount.txt", "r") as views_data:
-            data = views_data.readline().strip()
-            if data:  # Check if data is not empty
-                counter, viewers = data.split(",")
-                viewers = viewers.strip("[]").split(",")  # Convert string to list
-            else:
-                # If the file is empty, initialize counter and viewers
-                counter = 0
+        with open("viewscount.txt", "r+") as views_data:
+            data = views_data.readlines()
+            
+            # Check if the file is empty
+            if not data:
+                couter = 0  # Initialize counter to 0 if file is empty
                 viewers = []
-    except FileNotFoundError:
-        # If the file does not exist, initialize it
-        counter = 0
+            else:
+                # Split the first line into counter and viewers
+                couter, viewers = data[0].strip().split(",")
+                viewers = eval(viewers)  # Convert string representation of list to list
+                
+            # Ensure counter is an integer
+            couter = int(couter)
+            
+            if ip not in viewers:
+                couter += 1  # Increment the counter if IP is new
+                viewers.append(ip)  # Add the new viewer IP to the list
+                
+                # Write updated counter and viewers back to the file
+                with open("viewscount.txt", "w") as file:
+                    file.write(f"{couter},{viewers}")
+    except Exception as e:
+        print(f"Error reading or writing views count: {e}")
+        couter = 0  # Fallback to zero on error
         viewers = []
-        with open("viewscount.txt", "w") as views_data:
-            views_data.write(f"{counter},[]")
 
-    # Update view count if IP is not in viewers list
-    if ip not in viewers:
-        counter = int(counter) + 1
-        viewers.append(ip)
-
-        # Write updated view count data back to file
-        with open("viewscount.txt", "w") as file:
-            file.write(f"{counter},[{','.join(viewers)}]")
-
-    return render_template("index.html", ip=counter)
+    return render_template("index.html", ip=couter)
 
 
 @app.route("/projects")
