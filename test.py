@@ -4,16 +4,16 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = 'your_secret_key'  # Replace with your actual secret key
 
 def send_email(subject, body):
     try:
-       
+        # Set up the SMTP server
         s = smtplib.SMTP('smtp.gmail.com', 587)
         s.starttls()
-        s.login("padaliyabhavya834@gmail.com", "oybr xpyq tzfc uddk") 
+        s.login("padaliyabhavya834@gmail.com", "your_email_password")  # Replace with your actual password
 
-       
+        # Create the email
         msg = MIMEMultipart()
         msg['From'] = "padaliyabhavya834@gmail.com"
         msg['To'] = "bhvyap67@gmail.com"
@@ -25,34 +25,20 @@ def send_email(subject, body):
         # Send the email
         s.send_message(msg)
         s.quit()
-
         return True
     except Exception as e:
         print(f"Failed to send email: {e}")
         return False
-
 
 @app.route("/")
 def home():
     ip = request.remote_addr
 
     # Read view count data
-    try:
-        with open("viewscount.txt", "r") as views_data:
-            data = views_data.readline().strip()
-            if data:  # Check if data is not empty
-                counter, viewers = data.split(",")
-                viewers = viewers.strip("[]").split(",")  # Convert string to list
-            else:
-                # If the file is empty, initialize counter and viewers
-                counter = 0
-                viewers = []
-    except FileNotFoundError:
-        # If the file does not exist, initialize it
-        counter = 0
-        viewers = []
-        with open("viewscount.txt", "w") as views_data:
-            views_data.write(f"{counter},[]")
+    with open("viewscount.txt", "r") as views_data:
+        data = views_data.readline().strip()
+        counter, viewers = data.split(",")
+        viewers = viewers.strip("[]").split(",")  # Simple way to convert string to list
 
     # Update view count if IP is not in viewers list
     if ip not in viewers:
@@ -64,7 +50,6 @@ def home():
             file.write(f"{counter},[{','.join(viewers)}]")
 
     return render_template("index.html", ip=counter)
-
 
 @app.route("/projects")
 def projects():
