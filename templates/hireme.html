@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bhavya Padaliya Portfolio - Hire Me</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100;400;700&display=swap');
+
+        body {
+            padding: 0;
+            margin: 0;
+            font-family: 'Roboto Mono', monospace;
+            background-color: #f8f9fa; /* Light background color */
+        }
+
+        .icon img {
+            width: 50px;
+        }
+
+        .navbar {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:10px 20px;
+            
+        }
+
+        .icon {
+            padding: 0 50px;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon .name {
+            padding-left: 20px;
+            font-size: 20px;
+            color: #f39c12;
+        }
+
+        .icon .name a {
+            text-decoration: none;
+            color: #f39c12;
+        }
+
+        .nav-items {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-items ul {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .nav-items ul li {
+            margin: 0 10px;
+        }
+
+        .nav-items ul li a {
+            font-size: 16px;
+            text-decoration: none;
+            color: #2c3e50;
+            padding: 8px 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-items ul li a:hover {
+            color: #f39c12;
+            text-decoration: underline;
+        }
+
+        .main {
+            max-width: 800px; /* Adjusted max-width for better readability */
+            margin: 50px auto;
+            padding: 20px;
+            border-radius: 8px; /* Rounded corners */
+           
+        }
+
+        h1 {
+            font-size: 36px; /* Adjusted font size for headings */
+            color: #f39c12;
+            text-align: center;
+            margin-bottom: 20px; /* Spacing below heading */
+        }
+
+        .form-section, .service-links {
+            margin-top: 30px;
+        }
+
+        .form-section label {
+            margin: 10px 0 5px;
+            font-size: 16px; /* Slightly smaller font for labels */
+            color: #2c3e50;
+        }
+
+        .form-section input,
+        .form-section textarea,
+        .form-section select {
+            padding: 10px 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            width: 100%; 
+            margin-top:20px;
+        }
+
+        .form-section button {
+            padding: 10px 20px;
+            background-color: #f39c12;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .form-section button:hover {
+            background-color: #e67e22;
+        }
+
+        .service-links h2 {
+            font-size: 28px;
+            color: #f39c12;
+            text-align: center;
+        }
+
+        .service-links ul {
+            list-style: none;
+            padding: 0;
+            text-align: center;
+        }
+
+        .service-links li {
+            margin-bottom: 15px;
+        }
+
+        .service-links a {
+            color: #2980b9; /* Link color */
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .service-links a:hover {
+            color: #f39c12; /* Change color on hover */
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-items {
+                margin-top: 10px;
+                display: none;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                padding: 20px 0;
+            }
+
+            .nav-items ul {
+                flex-direction: column;
+            }
+
+            .nav-items ul li {
+                margin: 10px 0;
+            }
+
+            .nav-items ul li a {
+                width: 100%;
+                text-align: center;
+                padding: 10px 0;
+            }
+
+            .main h1 {
+                font-size: 24px; /* Smaller heading on mobile */
+            }
+
+            .form-section {
+                width: 90%;
+            }
+
+            .icon {
+                padding: 0;
+            }
+        }
+
+        .nav-toggle {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: #f39c12;
+        }
+
+        @media (max-width: 768px) {
+            .nav-toggle {
+                display: block;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="icon">
+            <img src="static/icon_gif_animated.gif" alt="animated icon" class="animated-icon">
+            <span class="name"><a href="{{url_for('home')}}">Bhavya Padaliya</a></span>
+        </div>
+        <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+        <div class="nav-items">
+            <ul>
+                <li><a href="{{url_for('home')}}">Home</a></li>
+                <li><a href="{{url_for('home')}}">About</a></li>
+                <li><a href="{{url_for('projects')}}">Projects</a></li>
+                <li><a href="{{url_for('home')}}">Contact</a></li>
+                <li><a href="{{url_for('hireme')}}">Hire Me</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main">
+        <h1>Hire Me</h1>
+        <section class="form-section">
+            <h2>Client Details</h2>
+
+            <label for="client-name">Your Name:</label>
+            <input type="text" id="client-name" placeholder="Enter your name" required>
+
+            <label for="client-email">Your Email:</label>
+            <input type="email" id="client-email" placeholder="Enter your email" required>
+
+            <h2>Project Details</h2>
+
+            <label for="project-title">Project Title:</label>
+            <input type="text" id="project-title" placeholder="Enter your project title">
+
+            <label for="project-description">Project Description:</label>
+            <textarea id="project-description" rows="4" placeholder="Describe your project..."></textarea>
+
+            <label for="service-type">Service Type:</label>
+            <select id="service-type">
+                <option value="">Select a service</option>
+                <option value="JavaConsoleApplications">Java Console Applications</option>
+                <option value="PythonConsoleApplications">Python Console Applications</option>
+                <option value="PhpWebDevelopment">PHP Web Development</option>
+            </select>
+            
+            <p style="font-size: 14px; color: #7f8c8d; margin-top: 5px;">
+                * For web development related projects, please provide designs later.
+            </p>
+
+            <label for="deadline">Deadline:</label>
+            <input type="date" id="deadline">
+
+            <label for="budget">Budget:</label>
+            <input type="text" id="budget" placeholder="Enter your budget">
+
+            <label for="additional-notes">Additional Notes:</label>
+            <textarea id="additional-notes" rows="4" placeholder="Any additional notes..."></textarea>
+
+            <button id="submit-button">Submit</button>
+        </section>
+
+        <!--
+            <h2>Project Links</h2>
+            <ul>
+                <li><a href="https://yourfullstackprojects.com" target="_blank">View All Full Stack Projects</a></li>
+                <li><a href="https://yourconsoleprojects.com" target="_blank">View All Console Applications</a></li>
+                <li><a href="https://yourphpprojects.com" target="_blank">View All PHP Projects</a></li>
+                <li><a href="https://yourdataanalysis.com" target="_blank">View All Data Analysis Projects</a></li>
+                <li><a href="https://yourdatabasemanagement.com" target="_blank">View All MySQL Projects</a></li>
+                <li><a href="https://yourapidprojects.com" target="_blank">View All API Development Projects</a></li>
+                <li><a href="https://yourautomationprojects.com" target="_blank">View All Automation Scripts</a></li>
+            </ul>
+        </section> -->
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const navItems = document.querySelector('.nav-items');
+            navItems.style.display = navItems.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        document.getElementById("submit-button").onclick = function() {
+            alert("Thank you for your submission! I have received your details and will contact you through email shortly.");
+        };
+    </script>
+</body>
+</html>

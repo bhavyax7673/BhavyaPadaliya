@@ -84,7 +84,7 @@
             justify-content: center;
             align-items: center;
             max-width: 1000px;
-            margin: 50px auto;
+            margin: 80px auto;
             padding: 20px;
         }
 
@@ -141,7 +141,10 @@
         .button:hover {
             background-color: #d68a11;
         }
-
+        .text button a{
+            text-decoration:none;
+            color:white;
+        }
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -327,11 +330,11 @@
         <div class="nav-toggle" onclick="toggleMenu()">☰</div>
         <div class="nav-items">
             <ul>
-                <li><a href="index.html">Home</a></li>
+                <li><a href="{{url_for("home")}}">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="{{url_for('projects')}}">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#">Hire Me</a></li>
+                <li><a href="#contacts">Contact</a></li>
+                <li><a href="{{url_for("hireme")}}">Hire Me</a></li>
             </ul>
         </div>
     </nav>
@@ -343,8 +346,8 @@
                 <h2>I'm Bhavya Padaliya</h2>
                 <h3>2nd Year BTech Student in CSE, Aspiring Backend Developer.</h3>
                 <div class="buttons">
-                    <button class="button">Hire Me</button>
-                    <button class="viewprojects button">View Projects</button>
+                    <button class="button"><a href="{{url_for("hireme")}}">Hire Me</a></button>
+                    <button class="viewprojects button"><a href="https://github.com/bhavyax7673?tab=repositories">View Projects</a></button>
                 </div>
             </div>
         </section>
@@ -355,7 +358,7 @@
         <section class="aboutme" id="about">
             <div class="text">
                 <h4>About</h4>
-                <p>I am Bhavya Padaliya, a dedicated and ambitious Computer Science Engineering student in my second year. With a strong focus on backend development, I am passionate about creating efficient, scalable systems and solving complex technical challenges. <br><br> My journey in tech is driven by a commitment to continuous learning, and I am actively working on building a solid foundation in various programming languages and frameworks. My long-term goal is to contribute meaningfully to the tech industry while developing innovative solutions that enhance user experiences. <br><br>Skills :- Core Python, Java, PHP, Flask, Mysql, PHPMyAdmin, Git, Github</p>
+                <p>I’m Bhavya Padaliya, a second-year Computer Science Engineering student with a passion for backend development. I focus on creating efficient, scalable systems and love solving complex technical challenges. Committed to continuous learning, I'm building a solid foundation in various programming languages and frameworks.<br><br>Skills :- Core Python, Java, PHP, Flask, Mysql, PHPMyAdmin, Git, Github</p>
             </div>
         </section>
 
