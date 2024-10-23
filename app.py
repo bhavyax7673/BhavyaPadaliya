@@ -2,9 +2,34 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///Portfolio.db"
+db = SQLAlchemy(app)
+
+class ClientProjects(db.Model):
+
+    id = db.Column(db.Integer,primary_key = True,autoincrement=True)
+    client_name = db.Column(db.String)
+    client_email = db.Column(db.String)
+    project_title = db.Column(db.String)
+    project_description = db.Column(db.Text)
+    service_type = db.Column(db.String)
+    deadline = db.Column(db.String)
+    budget = db.Column(db.Integer)
+    additional_notes = db.Column(db.String)
+
+    def __init__(self,client_name,client_email,project_title,project_desc,service_type,deadline,budget,additional_notes):
+        self.client_name = client_name
+        self.client_email = client_email
+        self.project_title = project_title
+        self.project_description = project_desc
+        self.service_type = service_type
+        self.deadline = deadline
+        self.budget = budget
+        self.additional_notes = additional_notes
 
 def send_email(to,subject, body):
     try:
@@ -35,9 +60,6 @@ def send_email(to,subject, body):
 @app.route("/")
 def home():
     return render_template("index.html")
-@app.route("/projects")
-def projects():
-    return render_template("projects.html")
 
 @app.route("/contact", methods=["POST"])
 def contact():
@@ -46,6 +68,7 @@ def contact():
     message = request.form.get("message").strip()
 
     if send_email("bhvyap67@gmail.com","Message from Portfolio Visitor", f"Name: {name}\nEmail: {email}\n\nMessage:\n{message}"):
+
         flash("Your message has been sent successfully!", "success")
 
         
@@ -53,6 +76,14 @@ def contact():
         flash("There was an issue sending your message. Please try again.", "error")
 
     return redirect(url_for("home"))
+
+@app.route("/test")
+def test():
+    
+    client = ClientProjects.query.first()
+
+    return client.client_name
+
 @app.route("/hireme", methods=["POST"])
 def hireme():
     client_name = request.form.get("client-name").strip()
@@ -81,8 +112,11 @@ def hireme():
     # Send email to the developer
     if send_email("bhvyap67@gmail.com", subject, body):
         flash("Your project inquiry has been sent successfully!", "success")
+        client = ClientProjects(client_name=client_name,client_email=client_email,project_title=project_title,project_desc=project_description,service_type=service_type,deadline=deadline,budget=budget,additional_notes=additional_notes)
+        db.session.add(client)
+        db.session.commit()
 
-        # Send confirmation email to the client
+       
         confirmation_subject = "Confirmation of Your Project Inquiry"
         confirmation_body = (f"Dear {client_name},\n\n"
                              f"Thank you for reaching out to me regarding your project titled \"{project_title}\". I have successfully received your inquiry and appreciate the information you provided.\n\n"
